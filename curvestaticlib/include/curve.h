@@ -20,6 +20,7 @@ public:
 	unsigned int getRadius() const;
 	const Point& getPoint() const;
 	virtual void getFirstDerivative() const = 0;
+	virtual ~Curve() = default;
 
 protected:
 	Curve(int x, int y, int z, int radius);
