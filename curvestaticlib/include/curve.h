@@ -4,12 +4,19 @@
 #include <iostream>
 
 class Curve {
-private:
+protected:
 	struct Point {
-		int x;
-		int y;
-		int z;
-		Point(int x, int y, int z);
+		double x;
+		double y;
+		double z;
+		Point(double x, double y, double z);
+	};
+
+	struct Vector {
+		double x;
+		double y;
+		double z;
+		Vector(double x, double y, double z);
 	};
 
 protected:
@@ -18,13 +25,14 @@ protected:
 
 public:
 	unsigned int getRadius() const;
-	const Point& getPoint() const;
-	virtual void getFirstDerivative() const = 0;
+	virtual Point getPoint(double t) const = 0;
+	virtual Vector getFirstDerivative(double t) const = 0;
 	virtual ~Curve() = default;
 
 protected:
-	Curve(int x, int y, int z, int radius);
+	Curve(double x, double y, double z, unsigned int radius);
 
+	friend std::ostream& operator<< (std::ostream&, const Curve::Vector&);
 	friend std::ostream& operator<< (std::ostream&, const Curve::Point&);
 };
 

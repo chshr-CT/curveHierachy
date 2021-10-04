@@ -2,12 +2,14 @@
 #define CIRCLE_H
 
 #include "curve.h"
+#include <cmath>
 
 class Circle : public Curve {
 public:
-	Circle(int x, int y, int z, unsigned int radius);
+	Circle(double x, double y, double z, unsigned int radius);
 
-	void getFirstDerivative() const override;
+	Point getPoint(double t) const override;
+	Vector getFirstDerivative(double t) const override;
 };
 
 #endif

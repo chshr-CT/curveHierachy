@@ -1,10 +1,13 @@
 #include "circle.h"
-#include <iostream>
 
-Circle::Circle(int x, int y, int z, unsigned int radius) : Curve(x, y, z, radius) {
+Circle::Circle(double x, double y, double z, unsigned int radius) : Curve(x, y, z, radius) {
 
 }
 
-void Circle::getFirstDerivative() const {
-	std::cout << "circle first derivative\n";
+Curve::Point Circle::getPoint(double t) const {
+	return Curve::Point(radius * cos(t) + point.x, radius * sin(t) + point.y, point.z);
+}
+
+Curve::Vector Circle::getFirstDerivative(double t) const {
+	return Curve::Vector(-1 * radius * sin(t), radius * cos(t), 0.0);
 }

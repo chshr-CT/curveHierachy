@@ -10,7 +10,12 @@
 #include <omp.h>
 
 std::ostream& operator<< (std::ostream& out, const Curve::Point& point) {
-	out << "X = " << point.x << " Y = " << point.y << " Z = " << point.z << ' ';
+	out << "point(X = " << point.x << " Y = " << point.y << " Z = " << point.z << ") ";
+	return out;
+}
+
+std::ostream& operator<< (std::ostream& out, const Curve::Vector& vector) {
+	out << "vec(X = " << vector.x << " Y = " << vector.y << " Z = " << vector.z << ") ";
 	return out;
 }
 
@@ -34,8 +39,7 @@ int main() {
 	circlesVector.reserve(curvesVector.size());
 
 	for(const std::shared_ptr<Curve>& element : curvesVector) {
-		std::cout << element->getPoint();
-		element->getFirstDerivative();
+		std::cout << element->getPoint(3.14159265/4) << element->getFirstDerivative(3.14159265/4) << '\n';
 		if(Circle* ptr = dynamic_cast<Circle*>(element.get())) {
 			circlesVector.emplace_back(element, ptr);
 		}
